@@ -1,6 +1,8 @@
 package E2EEApplication.journalApp.controller;
 
 import E2EEApplication.journalApp.entity.JournalEntry;
+import E2EEApplication.journalApp.service.JournalEntryService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -13,6 +15,10 @@ import java.util.Map;
 public class JournalEntryControllerV2
 {
 
+    @Autowired
+    private JournalEntryService journalEntryService;
+
+
     @GetMapping
     public List<JournalEntry> getAll()
     {
@@ -21,6 +27,7 @@ public class JournalEntryControllerV2
     @PostMapping
     public boolean createEntry(@RequestBody JournalEntry myEntry)
     {
+        journalEntryService.saveEntry(myEntry);
         return true;
     }
 
